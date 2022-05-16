@@ -6,7 +6,7 @@ import (
 	"regexp"
 )
 
-var regexNum = regexp.MustCompile("[0-9]*")
+var regexNum = regexp.MustCompile("[-+*/a-zA-Z]")
 
 
 func sum(s1 *string, s2 *string) string {
@@ -30,10 +30,10 @@ func sum(s1 *string, s2 *string) string {
 	var carry uint8 = 0
 
 	//////////////////// check case not correct formate
-	if !regexNum.MatchString(*s1){
+	if regexNum.MatchString(*s1){
 		fmt.Println("s1 not correct formate")
 	}
-	if !regexNum.MatchString(*s2){
+	if regexNum.MatchString(*s2){
 		fmt.Println("s2 not correct formate")
 	}
 	//////////////////////////////////////////
@@ -69,6 +69,8 @@ func sum(s1 *string, s2 *string) string {
 	if carry != 0{
 		res = fmt.Sprint(carry,res)
 	}
+
+
 	return res
 }
 
@@ -76,8 +78,8 @@ func sum(s1 *string, s2 *string) string {
 
 func main() {
 	fmt.Println("Welcome to Sum program!")
-	param1 := "1a23"
-	param2 := "123"
+	param1 := "1"
+	param2 := "2ab"
 	total := sum(&param1, &param2)
 	fmt.Println("Result:", total)
 }
