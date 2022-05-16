@@ -41,10 +41,10 @@ func sum(s1 *string, s2 *string) (string, error) {
 
 	//////////////////// check case not correct formate ////////////////
 	if regexNum.MatchString(*s1){
-		return "",ExNumberFormationException{"ExNumberFormationException in string 1 at index:",regexNum.FindStringIndex(*s1)[0] + 1}
+		return "",ExNumberFormationException{"ExNumberFormationException in string 1 at index:",regexNum.FindStringIndex(*s1)[0]}
 	}
 	if regexNum.MatchString(*s2){
-		return "",ExNumberFormationException{"ExNumberFormationException in string 2 at index:",regexNum.FindStringIndex(*s2)[0] + 1}
+		return "",ExNumberFormationException{"ExNumberFormationException in string 2 at index:",regexNum.FindStringIndex(*s2)[0]}
 	}
 	////////////////////////////////////////////////////////////////////////////
 	if len1 > len2{
