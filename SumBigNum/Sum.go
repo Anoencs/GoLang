@@ -21,9 +21,9 @@ func sum(s1 string, s2 string) string {
 	for i := 0; i < maxlen; i++{
 		num1 = s1[len(s1) - i - 1] - '0'
 		num2 = s2[len(s2) - i - 1] - '0'
-		res = fmt.Sprint((d1 + d2 + carry ) % 10,res)
+		res = fmt.Sprint((num1 + num2 + carry ) % 10,res)
 		carry = 0
-		if d1 + d2 > 10{
+		if num1 + num2 > 10{
 			carry += 1
 		}
 	}
