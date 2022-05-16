@@ -4,12 +4,22 @@ import (
 	//"errors"
 	"fmt"
 	"regexp"
+	"strconv"
 )
 
 var regexNum = regexp.MustCompile("[-+*/a-zA-Z]")
 
+type ExNumberFormationException struct{
+	errorMessage string
+	errorIdx int
+}
 
-func sum(s1 *string, s2 *string) string {
+func (e ExNumberFormationException) Error() string{
+	return e.errorMessage + " " +  strconv.Itoa(e.errorIdx)
+}
+
+
+func sum(s1 *string, s2 *string) (string, error) {
 	//////////////  check case nil ////////////////
 	if s1 == nil{
 		s1 = new(string)
@@ -20,7 +30,7 @@ func sum(s1 *string, s2 *string) string {
 		s2 = new(string)
 		*s2 = ""
 	}
-	//////////////init variable/////////////////
+	//////////////init variable//////////////////////////////////////////////////////
 	var res string
 	var len1 int = len(*s1)
 	var len2 int = len(*s2) 
@@ -29,14 +39,14 @@ func sum(s1 *string, s2 *string) string {
 	var maxlen int
 	var carry uint8 = 0
 
-	//////////////////// check case not correct formate
+	//////////////////// check case not correct formate ////////////////
 	if regexNum.MatchString(*s1){
-		fmt.Println("s1 not correct formate")
+		return "",ExNumberFormationException{"ExNumberFormationException in string 1 at index:",regexNum.FindStringIndex(*s1)[0] + 1}
 	}
 	if regexNum.MatchString(*s2){
-		fmt.Println("s2 not correct formate")
+		return "",ExNumberFormationException{"ExNumberFormationException in string 2 at index:",regexNum.FindStringIndex(*s2)[0] + 1}
 	}
-	//////////////////////////////////////////
+	////////////////////////////////////////////////////////////////////////////
 	if len1 > len2{
 		maxlen = len1
 	}else{
@@ -71,15 +81,20 @@ func sum(s1 *string, s2 *string) string {
 	}
 
 
-	return res
+	return res,nil
 }
 
 
 
 func main() {
 	fmt.Println("Welcome to Sum program!")
-	param1 := "1"
-	param2 := "2ab"
-	total := sum(&param1, &param2)
-	fmt.Println("Result:", total)
+	param1 := "11a1111"
+	param2 := "22222"
+
+	total,err := sum(&param1, &param2)
+	if err != nil{
+		fmt.Println(err)
+	}else{
+		fmt.Printf("Result sum %s and %s: %s ",param1,param2,total)
+	}
 }
