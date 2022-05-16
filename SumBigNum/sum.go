@@ -1,25 +1,16 @@
 package main
 
 import (
-	//"errors"
 	"fmt"
 	"regexp"
-	"strconv"
 )
 
-var regexNum = regexp.MustCompile("[-+*/a-zA-Z]")
 
-type ExNumberFormationException struct{
-	errorMessage string
-	errorIdx int
-}
-
-func (e ExNumberFormationException) Error() string{
-	return e.errorMessage + " " +  strconv.Itoa(e.errorIdx)
-}
 
 
 func sum(s1 *string, s2 *string) (string, error) {
+	///////// regex
+	var regexNum = regexp.MustCompile("[-+*/a-zA-Z]")
 	//////////////  check case nil ////////////////
 	if s1 == nil{
 		s1 = new(string)
@@ -70,10 +61,7 @@ func sum(s1 *string, s2 *string) (string, error) {
 		}
 
 		res = fmt.Sprint((num1 + num2 + carry ) % 10,res)
-		carry = 0
-		if num1 + num2 > 10{
-			carry += 1
-		}
+		carry = (num1 + num2 + carry ) / 10
 	}
 	
 	if carry != 0{
@@ -85,16 +73,3 @@ func sum(s1 *string, s2 *string) (string, error) {
 }
 
 
-
-func main() {
-	fmt.Println("Welcome to Sum program!")
-	param1 := "11a1111"
-	param2 := "22222"
-
-	total,err := sum(&param1, &param2)
-	if err != nil{
-		fmt.Println(err)
-	}else{
-		fmt.Printf("Result sum %s and %s: %s ",param1,param2,total)
-	}
-}
