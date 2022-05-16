@@ -5,9 +5,6 @@ import (
 	"regexp"
 )
 
-
-
-
 func sum(s1 *string, s2 *string) (string, error) {
 	///////// regex
 	var regexNum = regexp.MustCompile("[-+*/a-zA-Z]")

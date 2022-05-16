@@ -176,3 +176,35 @@ func TestN_10(t *testing.T){
 		}
 	}
 }
+func TestN_11(t *testing.T){
+	s1 := "111111111"
+	s2 := "899999999"
+	res,err := sum(&s1,&s2)
+	expected := "1011111110"
+
+	if err !=nil{
+		t.Errorf("FAILED %s", err)
+	}else{
+		if res != expected{
+			t.Errorf("FAILED. Expected: %s, Got %s\n",expected,res)
+		}else{
+			t.Logf("PASS")
+		}
+	}
+}
+func TestN_12(t *testing.T){
+	s1 := "111122"
+	s2 := "9"
+	res,err := sum(&s1,&s2)
+	expected := "111131"
+
+	if err !=nil{
+		t.Errorf("FAILED %s", err)
+	}else{
+		if res != expected{
+			t.Errorf("FAILED. Expected: %s, Got %s\n",expected,res)
+		}else{
+			t.Logf("PASS")
+		}
+	}
+}
