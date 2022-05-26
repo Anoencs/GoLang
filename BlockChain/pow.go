@@ -25,12 +25,12 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 	var hashInt big.Int
 	var hash [32]byte
 	nonce := 0
-	fmt.Printf("Mining the block containing \"%s\"\n", pow.block.data)
+	fmt.Printf("Mining the new block \n")
 	for nonce < math.MaxInt64 {
 		data := bytes.Join([][]byte{
-			pow.block.prevHash,
-			pow.block.data,
-			IntToHex(pow.block.timeStamp),
+			pow.block.PrevHash,
+			pow.block.HashTransaction(),
+			IntToHex(pow.block.TimeStamp),
 			IntToHex(int64(targetBits)),
 			IntToHex(int64(nonce)),
 		}, []byte{})
@@ -41,7 +41,7 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 		if hashInt.Cmp(pow.target) == -1 {
 			break
 		} else {
-			nonce++
+			break
 		}
 	}
 	fmt.Print("\n\n")
