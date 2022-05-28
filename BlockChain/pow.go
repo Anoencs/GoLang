@@ -8,7 +8,7 @@ import (
 	"math/big"
 )
 
-const targetBits = 24
+const targetBits = 12
 
 type ProofOfWork struct {
 	block  *Block
@@ -41,7 +41,7 @@ func (pow *ProofOfWork) Run() (int, []byte) {
 		if hashInt.Cmp(pow.target) == -1 {
 			break
 		} else {
-			break
+			nonce++
 		}
 	}
 	fmt.Print("\n\n")
