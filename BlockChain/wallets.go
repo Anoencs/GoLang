@@ -10,10 +10,12 @@ import (
 	"os"
 )
 
+// Wallets stores a collection of wallets
 type Wallets struct {
 	Wallets map[string]*Wallet
 }
 
+// NewWallets creates Wallets and fills it from a file if it exists
 func NewWallets() (*Wallets, error) {
 	wallets := Wallets{}
 	wallets.Wallets = make(map[string]*Wallet)
@@ -23,6 +25,7 @@ func NewWallets() (*Wallets, error) {
 	return &wallets, err
 }
 
+// CreateWallet adds a Wallet to Wallets
 func (ws *Wallets) CreateWallet() string {
 	wallet := NewWallet()
 	address := fmt.Sprintf("%s", wallet.GetAddress())
@@ -32,6 +35,7 @@ func (ws *Wallets) CreateWallet() string {
 	return address
 }
 
+// GetAddresses returns an array of addresses stored in the wallet file
 func (ws *Wallets) GetAddresses() []string {
 	var addresses []string
 
@@ -71,7 +75,6 @@ func (ws *Wallets) LoadFromFile() error {
 	return nil
 }
 
-// SaveToFile saves wallets to a file
 func (ws Wallets) SaveToFile() {
 	var content bytes.Buffer
 
