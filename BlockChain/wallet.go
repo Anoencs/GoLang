@@ -12,7 +12,6 @@ import (
 )
 
 const version = byte(0x00)
-const walletFile = "wallet.dat"
 const addressChecksumLen = 4
 
 type Wallet struct {
@@ -48,7 +47,7 @@ func (w Wallet) GetAddress() []byte {
 	address := Base58Encode(fullPayload)
 
 	return address
-} 
+}
 
 func HashPubKey(pubKey []byte) []byte {
 	publicSHA256 := sha256.Sum256(pubKey)
