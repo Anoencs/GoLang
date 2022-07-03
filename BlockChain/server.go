@@ -309,7 +309,7 @@ func handleTx(request []byte, bc *Blockchain) {
 
 	txData := payload.Transaction
 	tx := DeserializeTransaction(txData)
-	mempool[hex.EncodeToString(tx.ID)] = *tx
+	mempool[hex.EncodeToString(tx.ID)] = tx
 
 	if nodeAddress == knownNodes[0] {
 		for _, node := range knownNodes {
