@@ -3,7 +3,6 @@ module crud_app
 go 1.18
 
 require (
-	github.com/coreos/etcd v3.3.27+incompatible
 	github.com/google/uuid v1.3.0
 	github.com/lib/pq v1.10.6
 	github.com/stretchr/testify v1.8.0

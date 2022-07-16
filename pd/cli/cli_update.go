@@ -11,7 +11,7 @@ import (
 
 func (cli *CommandLine) Update_okr_period(dbname, tbname, id, name string, month, year, quarter uint64) *gorm.DB {
 	database := database.Database{DbName: dbname, TableName: tbname}
-	db := database.Db_connect()
+	db := database.Connect()
 	uuid, _ := uuid.Parse(id)
 	temp := models.Okr_period{Id: uuid, Month: month, Year: year, Quarter: quarter, Name: name}
 	return db.Model(&temp).Updates(&temp)
@@ -20,7 +20,7 @@ func (cli *CommandLine) Update_okr_period(dbname, tbname, id, name string, month
 
 func (cli *CommandLine) Update_okr_org(dbname, tbname, id, name string) *gorm.DB {
 	database := database.Database{DbName: dbname, TableName: tbname}
-	db := database.Db_connect()
+	db := database.Connect()
 	uuid, _ := uuid.Parse(id)
 	temp := models.Okr_org{Id: uuid, Name: name}
 	return db.Model(&temp).Updates(&temp)
@@ -28,7 +28,7 @@ func (cli *CommandLine) Update_okr_org(dbname, tbname, id, name string) *gorm.DB
 
 func (cli *CommandLine) Update_okr_obj(dbname, tbname, id, name, org_id, user_id, period_id, review_date, create_date, create_by, last_modified, last_modified_by string, status uint64) *gorm.DB {
 	database := database.Database{DbName: dbname, TableName: tbname}
-	db := database.Db_connect()
+	db := database.Connect()
 	id_uuid, _ := uuid.Parse(id)
 	org_id_uuid, _ := uuid.Parse(org_id)
 	user_id_uuid, _ := uuid.Parse(user_id)
@@ -45,7 +45,7 @@ func (cli *CommandLine) Update_okr_obj(dbname, tbname, id, name, org_id, user_id
 
 func (cli *CommandLine) Update_okr_user(dbname, tbname, org_id, name, user_id, manager_id, email, manager_email, role, department string) *gorm.DB {
 	database := database.Database{DbName: dbname, TableName: tbname}
-	db := database.Db_connect()
+	db := database.Connect()
 	org_id_uuid, _ := uuid.Parse(org_id)
 	manager_id_uuid, _ := uuid.Parse(manager_id)
 	user_id_uuid, _ := uuid.Parse(user_id)
@@ -55,7 +55,7 @@ func (cli *CommandLine) Update_okr_user(dbname, tbname, org_id, name, user_id, m
 
 func (cli *CommandLine) Update_okr_kr(dbname, tbname, create, last_modified, duedate, obj_id, name, id, user_id, last_modified_by, target_date, create_by string, itype, criterias uint64, start, target, self_grade, grade float64) *gorm.DB {
 	database := database.Database{DbName: dbname, TableName: tbname}
-	db := database.Db_connect()
+	db := database.Connect()
 	id_uuid, _ := uuid.Parse(id)
 	obj_id_uuid, _ := uuid.Parse(obj_id)
 	user_id_uuid, _ := uuid.Parse(user_id)

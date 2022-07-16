@@ -21,7 +21,21 @@ type Database struct {
 	TableName string
 }
 
-func (database *Database) Db_connect() *gorm.DB {
+func (database *Database) Init() {
+	dbURL := "postgres://postgres:1@localhost:5439/okr?sslmode=disable"
+
+	db, err := gorm.Open(postgres.Open(dbURL), &gorm.Config{})
+
+	if err != nil {
+		log.Fatalln(err)
+	}
+	db.Migrator().CreateTable(&models.Okr_org{})
+	db.Migrator().CreateTable(&models.Okr_period{})
+	db.Migrator().CreateTable(&models.Okr_obj{})
+	db.Migrator().CreateTable(&models.Okr_user{})
+	db.Migrator().CreateTable(&models.Okr_kr{})
+}
+func (database *Database) Connect() *gorm.DB {
 	connectionString := fmt.Sprintf("host=%s port=%s user=%s dbname=%s password=%s sslmode=disable",
 		"localhost", "5439", "postgres", database.DbName, "1",
 	)
@@ -34,7 +48,7 @@ func (database *Database) Db_connect() *gorm.DB {
 }
 
 func (database *Database) Import_xlsx_okr_period() {
-	db := database.Db_connect()
+	db := database.Connect()
 	if db.Migrator().HasTable(&models.Okr_period{}) {
 		db.Migrator().DropTable(&models.Okr_period{})
 	}
@@ -52,11 +66,11 @@ func (database *Database) Import_xlsx_okr_period() {
 }
 
 func (database *Database) Import_xlsx_okr_org() {
-	db := database.Db_connect()
+	db := database.Connect()
 	if db.Migrator().HasTable(&models.Okr_org{}) {
 		db.Migrator().DropTable(&models.Okr_org{})
 	}
-	db.Migrator().CreateTable(&models.Okr_org{})
+	//db.Migrator().CreateTable(&models.Okr_org{})
 	xlsx := xlsx.Xlsx{FilePath: "data.xlsx", SheetName: database.TableName}
 	xlsx_reader := xlsx.Read_xlsx()
 	for _, row := range xlsx_reader {
@@ -68,7 +82,7 @@ func (database *Database) Import_xlsx_okr_org() {
 }
 
 func (database *Database) Import_xlsx_okr_obj() {
-	db := database.Db_connect()
+	db := database.Connect()
 	if db.Migrator().HasTable(&models.Okr_obj{}) {
 		db.Migrator().DropTable(&models.Okr_obj{})
 	}
@@ -81,7 +95,7 @@ func (database *Database) Import_xlsx_okr_obj() {
 		user_id, _ := uuid.Parse(row[2])
 		period_id, _ := uuid.Parse(row[3])
 		name := row[4]
-		status, _ := strconv.ParseUint(row[5], 10, 4)
+		status, _ := strconv.ParseUint(row[5], 10, 64)
 		review_date, _ := time.Parse("00:00:00", row[6])
 		create_date, _ := time.Parse("00:00:00", row[7])
 		create_by, _ := uuid.Parse(row[8])
@@ -94,7 +108,7 @@ func (database *Database) Import_xlsx_okr_obj() {
 }
 
 func (database *Database) Import_xlsx_okr_user() {
-	db := database.Db_connect()
+	db := database.Connect()
 	if db.Migrator().HasTable(&models.Okr_user{}) {
 		db.Migrator().DropTable(&models.Okr_user{})
 	}
@@ -117,7 +131,7 @@ func (database *Database) Import_xlsx_okr_user() {
 }
 
 func (database *Database) Import_xlsx_okr_kr() {
-	db := database.Db_connect()
+	db := database.Connect()
 	if db.Migrator().HasTable(&models.Okr_kr{}) {
 		db.Migrator().DropTable(&models.Okr_kr{})
 	}
@@ -148,7 +162,7 @@ func (database *Database) Import_xlsx_okr_kr() {
 }
 
 func (database *Database) Delete_by_id(id string) {
-	db := database.Db_connect()
+	db := database.Connect()
 	uuid, _ := uuid.Parse(id)
 	if database.TableName == "okr_org" {
 		db.Unscoped().Delete(&models.Okr_org{}, uuid)

@@ -1,6 +1,7 @@
 package cli
 
 import (
+	"crud_app/database"
 	"flag"
 	"fmt"
 	"log"
@@ -27,6 +28,8 @@ func (cli *CommandLine) validateArgs() {
 
 func (cli *CommandLine) Run() {
 	cli.validateArgs()
+	// init db flag
+	initCmd := flag.NewFlagSet("init", flag.ContinueOnError)
 	// delete flag
 	deleteByIdCmd := flag.NewFlagSet("delete", flag.ExitOnError)
 	delete_ID := deleteByIdCmd.String("id", "", "The id to delete")
@@ -87,6 +90,11 @@ func (cli *CommandLine) Run() {
 		if err != nil {
 			log.Fatal(err)
 		}
+	case "init":
+		err := initCmd.Parse(os.Args[2:])
+		if err != nil {
+			log.Fatal(err)
+		}
 	}
 
 	if deleteByIdCmd.Parsed() {
@@ -121,5 +129,9 @@ func (cli *CommandLine) Run() {
 		} else {
 			cli.Update_okr_kr(*update_dbname, *update_tbname, *update_create, *update_last_modified, *update_duedate, *update_obj_id, *update_name, *update_id, *update_user_id, *update_last_modified_by, *update_targetdate, *update_create_by, *update_itype, *update_criterias, *update_start, *update_target, *update_selfgrade, *update_grade)
 		}
+	}
+	if initCmd.Parsed() {
+		db := database.Database{"okr", ""}
+		db.Init()
 	}
 }

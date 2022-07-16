@@ -11,7 +11,7 @@ import (
 type Okr_obj struct {
 	gorm.Model
 
-	Id               uuid.UUID `gorm:"type:uuid;primary_key;default:uuid_generate_v4()"`
+	Id               uuid.UUID `gorm:"type:uuid;primaryKey;default:uuid_generate_v4()"`
 	Org_id           uuid.UUID `gorm:"type:uuid; not null"`
 	User_id          uuid.UUID `gorm:"type:uuid; not null"`
 	Period_id        uuid.UUID `gorm:"<-"`
@@ -22,14 +22,15 @@ type Okr_obj struct {
 	Create_by        uuid.UUID `gorm:"<-"`
 	Last_modified    time.Time `gorm:"type:date"`
 	Last_modified_by uuid.UUID `gorm:"<-"`
+	Okr_kr           Okr_kr    `gorm:"foreignkey:Obj_id;references:Id"`
 }
 
 type Okr_kr struct {
 	gorm.Model
 
-	Id               uuid.UUID `gorm:"primary_key;type:uuid;default:uuid_generate_v4()"`
-	Obj_id           uuid.UUID `gorm:"type:uuid; not null"`
-	User_id          uuid.UUID `gorm:"type:uuid; not null"`
+	Id               uuid.UUID `gorm:"primaryKey;type:uuid;default:uuid_generate_v4()"`
+	Obj_id           uuid.UUID `gorm:"type:uuid; not null;"`
+	User_id          uuid.UUID `gorm:"type:uuid; not null;"`
 	Name             string    `gorm:"<-"`
 	Itype            uint64    `gorm:"<-"`
 	Criterias        uint64
@@ -49,7 +50,7 @@ type Okr_kr struct {
 type Okr_user struct {
 	gorm.Model
 
-	User_id       uuid.UUID `gorm:"primary key; type:uuid;not null; default:uuid_generate_v4()"`
+	User_id       uuid.UUID `gorm:"primaryKey;type:uuid;default:uuid_generate_v4();unique"`
 	Manager_id    uuid.UUID `gorm:"type:uuid;<-"`
 	Org_id        uuid.UUID `gorm:"type:uuid;<-"`
 	Email         string    `gorm:"type:varchar(500);<-"`
@@ -57,23 +58,28 @@ type Okr_user struct {
 	Name          string    `gorm:"type:varchar(100);<-"`
 	Role          string    `gorm:"type:varchar(50);<-"`
 	Department    string    `gorm:"type:varchar(50);<-"`
+	Manager       *Okr_user `gorm:"foreignkey:Manager_id;references:User_id"`
+	Okr_kr        Okr_kr    `gorm:"foreignkey:User_id;references:User_id"`
 }
 
 type Okr_org struct {
 	gorm.Model
 
-	Id   uuid.UUID `gorm:"primary_key;type:uuid;default:uuid_generate_v4()"`
-	Name string
+	Id       uuid.UUID `gorm:"primaryKey;type:uuid;default:uuid_generate_v4()"`
+	Name     string
+	Okr_obj  Okr_obj  `gorm:"foreignkey:Org_id;references:Id"`
+	Okr_user Okr_user `gorm:"foreignkey:Org_id;references:Id"`
 }
 
 type Okr_period struct {
 	gorm.Model
 
-	Id      uuid.UUID `gorm:"primary_key;type:uuid;default:uuid_generate_v4()"`
+	Id      uuid.UUID `gorm:"primaryKey;type:uuid;default:uuid_generate_v4()"`
 	Month   uint64
 	Year    uint64
 	Quarter uint64
 	Name    string
+	Okr_obj Okr_obj `gorm:"foreignkey:Period_id;references:Id"`
 }
 
 func (org *Okr_org) BeforeUpdate(tx *gorm.DB) (err error) {
