@@ -11,7 +11,7 @@ type Xlsx struct {
 	SheetName string
 }
 
-func (xlsx *Xlsx) Read_xlsx() [][]string {
+func (xlsx *Xlsx) Read_row_xlsx() [][]string {
 	f, err := excelize.OpenFile(xlsx.FilePath)
 	if err != nil {
 		fmt.Println(err)
@@ -28,4 +28,17 @@ func (xlsx *Xlsx) Read_xlsx() [][]string {
 		return [][]string{}
 	}
 	return rows
+}
+
+func (xlsx *Xlsx) Read_cell_xlsx() excelize.File {
+	f, err := excelize.OpenFile(xlsx.FilePath)
+	if err != nil {
+		fmt.Println(err)
+	}
+	defer func() {
+		if err := f.Close(); err != nil {
+			fmt.Println(err)
+		}
+	}()
+	return *f
 }

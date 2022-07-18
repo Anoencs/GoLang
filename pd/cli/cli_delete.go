@@ -5,8 +5,6 @@ import (
 )
 
 func (cli *CommandLine) delete(dbname, tbname, id string) {
-	database := database.Database{DbName: dbname, TableName: tbname}
+	database := database.Database{DbName: dbname}
 	database.Delete_by_id(id)
 }
-
-

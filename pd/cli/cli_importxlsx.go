@@ -2,20 +2,12 @@ package cli
 
 import (
 	"crud_app/database"
+	"crud_app/xlsx"
 )
 
-func (cli *CommandLine) import_xlsx(dbname, tbname string) {
-	database := database.Database{DbName: dbname, TableName: tbname}
-	if tbname == "okr_org" {
-		database.Import_xlsx_okr_org()
-	} else if tbname == "okr_period" {
-		database.Import_xlsx_okr_period()
-	} else if tbname == "okr_obj" {
-		database.Import_xlsx_okr_obj()
-	} else if tbname == "okr_user" {
-		database.Import_xlsx_okr_user()
-	} else if tbname == "okr_kr" {
-		database.Import_xlsx_okr_kr()
-	}
+func (cli *CommandLine) import_xlsx(path, sheet string) {
+	db := database.Database{DbName: "okr"}
+	xlsx := xlsx.Xlsx{FilePath: path, SheetName: sheet}
+	db.Import2db(xlsx)
 
 }

@@ -37,8 +37,8 @@ func (cli *CommandLine) Run() {
 	delete_tablename := deleteByIdCmd.String("tbname", "", "The table name to delete")
 
 	importCmd := flag.NewFlagSet("import", flag.ExitOnError)
-	import_dbname := importCmd.String("dbname", "", "The db name to import")
-	import_tbname := importCmd.String("tbname", "", "The tb name to import")
+	import_xlsx := importCmd.String("xlsx", "", "The excel path")
+	import_sheet := importCmd.String("sheet", "", "The sheet name")
 	// update flag
 	updateCmd := flag.NewFlagSet("update", flag.ExitOnError)
 	update_dbname := updateCmd.String("dbname", "", "The db name to import")
@@ -48,10 +48,10 @@ func (cli *CommandLine) Run() {
 	update_month := updateCmd.Uint64("month", 0, "The month data")
 	update_year := updateCmd.Uint64("year", 0, "The year data")
 	update_quarter := updateCmd.Uint64("quarter", 0, "The quarter data")
-	update_itype := updateCmd.Uint64("itype", 0, "The quarter data")
+	update_itype := updateCmd.String("itype", "", "The quarter data")
 	update_criterias := updateCmd.Uint64("criterias", 0, "The quarter data")
 	update_start := updateCmd.Float64("start", 0, "The quarter data")
-	update_target := updateCmd.Float64("target", 0, "The quarter data")
+	update_target := updateCmd.String("target", "", "The quarter data")
 	update_selfgrade := updateCmd.Float64("selfgrade", 0, "The quarter data")
 	update_grade := updateCmd.Float64("grade", 0, "The quarter data")
 	update_org_id := updateCmd.String("orgid", "", "The org id data")
@@ -95,6 +95,7 @@ func (cli *CommandLine) Run() {
 		if err != nil {
 			log.Fatal(err)
 		}
+
 	}
 
 	if deleteByIdCmd.Parsed() {
@@ -106,11 +107,11 @@ func (cli *CommandLine) Run() {
 	}
 
 	if importCmd.Parsed() {
-		if *import_dbname == "" || *import_tbname == "" {
+		if *import_xlsx == "" || *import_sheet == "" {
 			importCmd.Usage()
 			runtime.Goexit()
 		}
-		cli.import_xlsx(*import_dbname, *import_tbname)
+		cli.import_xlsx(*import_xlsx, *import_sheet)
 	}
 
 	if updateCmd.Parsed() {
@@ -127,11 +128,11 @@ func (cli *CommandLine) Run() {
 		} else if *update_tbname == "okr_user" {
 			cli.Update_okr_user(*update_dbname, *update_tbname, *update_org_id, *update_name, *update_user_id, *update_manager_id, *update_email, *update_manager_email, *update_role, *update_department)
 		} else {
-			cli.Update_okr_kr(*update_dbname, *update_tbname, *update_create, *update_last_modified, *update_duedate, *update_obj_id, *update_name, *update_id, *update_user_id, *update_last_modified_by, *update_targetdate, *update_create_by, *update_itype, *update_criterias, *update_start, *update_target, *update_selfgrade, *update_grade)
+			cli.Update_okr_kr(*update_dbname, *update_tbname, *update_create, *update_last_modified, *update_duedate, *update_obj_id, *update_name, *update_id, *update_user_id, *update_last_modified_by, *update_targetdate, *update_create_by, *update_itype, *update_target, *update_criterias, *update_start, *update_selfgrade, *update_grade)
 		}
 	}
 	if initCmd.Parsed() {
-		db := database.Database{"okr", ""}
+		db := database.Database{DbName: "okr"}
 		db.Init()
 	}
 }
