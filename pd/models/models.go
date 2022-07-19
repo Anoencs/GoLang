@@ -201,9 +201,8 @@ func (obj *Okr_obj) Read(excel xlsx.Xlsx) ([]Okr_obj, []Okr_kr) {
 			row_reader[i] = append(row_reader[i], "")
 		}
 
-		if row_reader[i][1] == "" {	
+		if row_reader[i][1] == "" {
 			kr_temp := Okr_kr{}
-			//kr_temp.Id = uuid.New()
 			kr_temp.Obj_id = okr_kr[len(okr_kr)-1].Obj_id
 			kr_temp.Name = row_reader[i][2]
 			kr_temp.Itype = row_reader[i][3]
@@ -232,7 +231,6 @@ func (obj *Okr_obj) Read(excel xlsx.Xlsx) ([]Okr_obj, []Okr_kr) {
 		obj_temp.Review_date = rv_date_time
 		/////////////////KR FORMATE////////////////////////////
 		kr_temp := Okr_kr{}
-		//kr_temp.Id = uuid.New()
 		kr_temp.Obj_id = obj_temp.Id
 		kr_temp.Name = row_reader[i][2]
 		kr_temp.Itype = row_reader[i][3]

@@ -107,25 +107,29 @@ func (cli *CommandLine) Run() {
 	}
 
 	if importCmd.Parsed() {
-		if *import_xlsx == "" || *import_sheet == "" {
+		if *import_xlsx == "" {
 			importCmd.Usage()
 			runtime.Goexit()
 		}
-		cli.import_xlsx(*import_xlsx, *import_sheet)
+		if *import_sheet == "" {
+			cli.import_all_xlsx(*import_xlsx)
+		} else {
+			cli.import_xlsx(*import_xlsx, *import_sheet)
+		}
 	}
 
 	if updateCmd.Parsed() {
 		if *update_dbname == "" || *update_tbname == "" || *update_id == "" {
-			importCmd.Usage()
+			updateCmd.Usage()
 			runtime.Goexit()
 		}
-		if *update_tbname == "okr_period" {
+		if *update_tbname == "okr_periods" {
 			cli.Update_okr_period(*update_dbname, *update_tbname, *update_id, *update_name, *update_month, *update_year, *update_quarter)
-		} else if *update_tbname == "okr_org" {
+		} else if *update_tbname == "okr_orgs" {
 			cli.Update_okr_org(*update_dbname, *update_tbname, *update_id, *update_name)
-		} else if *update_tbname == "okr_obj" {
+		} else if *update_tbname == "okr_objs" {
 			cli.Update_okr_obj(*update_dbname, *update_tbname, *update_id, *update_name, *update_org_id, *update_user_id, *update_period_id, *update_review_date, *update_create_date, *update_create_by, *update_last_modified, *update_last_modified_by, *update_status)
-		} else if *update_tbname == "okr_user" {
+		} else if *update_tbname == "okr_users" {
 			cli.Update_okr_user(*update_dbname, *update_tbname, *update_org_id, *update_name, *update_user_id, *update_manager_id, *update_email, *update_manager_email, *update_role, *update_department)
 		} else {
 			cli.Update_okr_kr(*update_dbname, *update_tbname, *update_create, *update_last_modified, *update_duedate, *update_obj_id, *update_name, *update_id, *update_user_id, *update_last_modified_by, *update_targetdate, *update_create_by, *update_itype, *update_target, *update_criterias, *update_start, *update_selfgrade, *update_grade)
