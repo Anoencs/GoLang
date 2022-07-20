@@ -42,12 +42,7 @@ func (xlsx *Xlsx) Read_cell_xlsx() excelize.File {
 	}()
 	return *f
 }
-func (xlsx *Xlsx) Close_file() {
-	f, _ := excelize.OpenFile(xlsx.FilePath)
-	if err := f.Close(); err != nil {
-		fmt.Println(err)
-	}
-}
+
 func (xlsx *Xlsx) GetListSheet() []string {
 	f, err := excelize.OpenFile(xlsx.FilePath)
 	if err != nil {
