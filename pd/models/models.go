@@ -134,9 +134,15 @@ func (period *Okr_period) Read(excel xlsx.Xlsx) {
 		log.Panic(err)
 	}
 	myq_split := strings.Split(myq, "/")
-	period.Month, _ = strconv.ParseUint(myq_split[1], 10, 64)
-	period.Quarter = uint64(math.Ceil(float64(period.Month / 3)))
-	period.Year, _ = strconv.ParseUint(myq_split[2], 10, 64)
+	if len(myq_split) >= 2 {
+		period.Month, _ = strconv.ParseUint(myq_split[1], 10, 64)
+		period.Quarter = uint64(math.Ceil(float64(period.Month / 3)))
+		period.Year, _ = strconv.ParseUint(myq_split[2], 10, 64)
+	} else {
+		period.Month = 0
+		period.Quarter = 0
+		period.Year = 0
+	}
 	name, err := cell_reader.GetCellValue(excel.SheetName, "F3")
 	if err != nil {
 		log.Panic(err)

@@ -39,6 +39,7 @@ func (cli *CommandLine) Run() {
 	importCmd := flag.NewFlagSet("import", flag.ExitOnError)
 	import_xlsx := importCmd.String("xlsx", "", "The excel path")
 	import_sheet := importCmd.String("sheet", "", "The sheet name")
+	import_folder := importCmd.String("dir", "", "The dir")
 	// update flag
 	updateCmd := flag.NewFlagSet("update", flag.ExitOnError)
 	update_dbname := updateCmd.String("dbname", "", "The db name to import")
@@ -107,13 +108,15 @@ func (cli *CommandLine) Run() {
 	}
 
 	if importCmd.Parsed() {
-		if *import_xlsx == "" {
+		if *import_xlsx == "" && *import_folder != "" {
+			cli.import_all_xlsx_folder(*import_folder)
+		} else if *import_xlsx == "" && *import_folder == "" {
 			importCmd.Usage()
 			runtime.Goexit()
 		}
-		if *import_sheet == "" {
+		if *import_sheet == "" && *import_xlsx != "" {
 			cli.import_all_xlsx(*import_xlsx)
-		} else {
+		} else if *import_sheet != "" && *import_xlsx != "" {
 			cli.import_xlsx(*import_xlsx, *import_sheet)
 		}
 	}

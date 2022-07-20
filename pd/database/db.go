@@ -61,6 +61,8 @@ func (database *Database) Delete_by_id(id string) {
 }
 func (database *Database) Import2db(xlsx xlsx.Xlsx) {
 	db := database.Connect()
+	sqlDB, _ := db.DB()
+	defer sqlDB.Close()
 	okr_user := models.Okr_user{}
 	okr_period := models.Okr_period{}
 	okr_org := models.Okr_org{}
@@ -99,7 +101,7 @@ func (database *Database) Import2db(xlsx xlsx.Xlsx) {
 	if exists {
 		res := models.Okr_user{}
 		db.First(&res, "Name = ?", okr_user.Manager.Name)
-		okr_user.Manager.User_id = res.User_id
+		okr_user.Manager_id = res.User_id
 	}
 	////////// exits ork_users ????? ///////////////////////
 	_ = db.Model(okr_user).
@@ -110,8 +112,7 @@ func (database *Database) Import2db(xlsx xlsx.Xlsx) {
 		db.Create(&okr_user)
 	} else {
 		res := models.Okr_user{}
-		db.First(&res, "Name = ?", okr_user.Name)
-		okr_user.User_id = res.User_id
+		db.First(&res, "Name = ? AND Role = ?", okr_user.Name, okr_user.Role)
 		if res.Manager_id == uuid.Nil {
 			if okr_user.Manager_id != uuid.Nil {
 				res.Manager_id = okr_user.Manager_id
@@ -119,6 +120,7 @@ func (database *Database) Import2db(xlsx xlsx.Xlsx) {
 				db.Save(&res)
 			}
 		}
+		okr_user.User_id = res.User_id
 	}
 
 	////////////////////////////////////////////////////////
