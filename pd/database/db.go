@@ -3,6 +3,7 @@ package database
 import (
 	"fmt"
 	"log"
+	"path/filepath"
 
 	"crud_app/models"
 	"crud_app/util"
@@ -70,47 +71,23 @@ func (database *Database) Import2db(excel_fp xlsx.Xlsx) {
 	defer sqlDB.Close()
 	okr_user := models.Okr_user{}
 	okr_period := models.Okr_period{}
-	okr_org := models.Okr_org{}
 	obj := models.Okr_obj{}
 	//read
 	okr_obj, okr_kr := obj.Read(excel_fp)
 	okr_user.Read(excel_fp)
 	okr_period.Read(excel_fp)
-	okr_org.Read(excel_fp)
 
 	//Create
 	var exists bool
-	okr_org.Name = okr_user.Department
-	//exist org of okr_org ??
-	_ = db.Model(okr_org.Org).
-		Select("count(*) > 0").
-		Where("Name = ?", okr_org.Org.Name).
-		Find(&exists).Error
-	if exists {
-		res := models.Okr_org{}
-		db.First(&res, "Name = ?", okr_org.Org.Name)
-		okr_org.Org_id = res.Id
-		okr_org.Org.Id = res.Id
-	}
-	//exists okr_org ?????
+	// create org
+	org := models.Okr_org{}
+	db.First(&org, "Name = ?", filepath.Base(filepath.Dir(excel_fp.FilePath)))
 
-	_ = db.Model(okr_org).
-		Select("count(*) > 0").
-		Where("Name = ?", okr_org.Name). //Where("Name = ?", okr_org.Name).
-		Find(&exists).Error
-	if !exists { // non exists
-		db.Create(&okr_org)
-	} else { // exists
-		res := models.Okr_org{}
-		db.First(&res, "Name = ?", okr_org.Name)
-		okr_org.Id = res.Id
-	}
-	///////////////////////////////////////////////////////////
-
-	okr_user.Org_id = okr_org.Id
-	okr_user.Manager.Org_id = okr_org.Id
-	db.Create(&okr_period)
-	//////////////////////// manager exists ???????//////////////////////////////////////
+	okr_user.Org_id = org.Id
+	okr_user.Manager.Org_id = org.Id
+	db.Create(&okr_period) // create period
+	//create user
+	//manager exists ???????
 	_ = db.Model(okr_user.Manager).
 		Select("count(*) > 0").
 		Where("Name = ? AND Role = ?", okr_user.Manager.Name, okr_user.Manager.Role).
@@ -120,24 +97,16 @@ func (database *Database) Import2db(excel_fp xlsx.Xlsx) {
 		db.First(&res, "Name = ?", okr_user.Manager.Name)
 		okr_user.Manager_id = res.User_id
 	}
-	////////// exits ork_users ????? ///////////////////////
+	//exits ork_users ?????
 	_ = db.Model(okr_user).
 		Select("count(*) > 0").
 		Where("Name = ? AND Role = ?", okr_user.Name, okr_user.Role).
 		Find(&exists).Error
 	if !exists { //non exist
-
-		// if okr_user.Name == "" {
-		// 	okr_user.Name = "UNKNOWN"
-		// }
-		// if okr_user.Manager.Name == "" {
-		// 	okr_user.Manager.Name = "UNKNOWN"
-		// }
-		// db.Create(&okr_user)
 		if okr_user.Name != "" && okr_user.Manager.Name != "" {
 			db.Create(&okr_user)
 		} else {
-			log.Printf("Error xlsxFile: %s, sheet: %s\n", excel_fp.FilePath, excel_fp.SheetName)
+			log.Printf("Error username xlsxFile: %s, sheet: %s\n", excel_fp.FilePath, excel_fp.SheetName)
 			return
 		}
 
@@ -154,15 +123,15 @@ func (database *Database) Import2db(excel_fp xlsx.Xlsx) {
 		okr_user.User_id = res.User_id
 	}
 
-	// update attribute for objtive
+	// update attribute for objtive and create obj
 	for i := 0; i < len(okr_obj); i++ {
-		okr_obj[i].Org_id = okr_org.Id
+		okr_obj[i].Org_id = org.Id
 		okr_obj[i].Period_id = okr_period.Id
 		okr_obj[i].User_id = okr_user.User_id
 		okr_obj[i].Create_by = okr_user.User_id
 		db.Create(&okr_obj[i])
 	}
-	// update attribute for key result
+	// update attribute for key result and create kr
 	for i := 0; i < len(okr_kr)-1; i++ {
 		okr_kr[i].Create_by = okr_user.User_id
 		okr_kr[i].User_id = okr_user.User_id

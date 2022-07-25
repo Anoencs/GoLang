@@ -2,6 +2,7 @@ package cli
 
 import (
 	"crud_app/database"
+	"crud_app/models"
 	"crud_app/util"
 	"crud_app/xlsx"
 	"fmt"
@@ -36,7 +37,7 @@ func (cli *CommandLine) import_all_xlsx(path string) {
 	listSheet := xlsx.GetListSheet()
 	for _, sheet_name := range listSheet {
 		xlsx.SheetName = sheet_name
-		//fmt.Printf("Reading file %s, sheet name: %s\n", path, sheet_name)
+		fmt.Printf("Reading file %s, sheet name: %s\n", path, sheet_name)
 		cell_reader := xlsx.Read_cell_xlsx()
 		check, _ := cell_reader.GetCellValue(sheet_name, "A2")
 		if check == config.OKR_CHECK {
@@ -53,6 +54,12 @@ func (cli *CommandLine) import_all_xlsx_folder(path string) {
 		log.Fatal("cannot load config:", err)
 	}
 	db := database.Database{DbName: config.DBNAME}
+	database := db.Connect()
+	okr_org := models.Okr_org{}
+	okr_org_list := okr_org.Read(path)
+	for _, org := range okr_org_list {
+		database.Create(&org)
+	}
 	xlsx := xlsx.Xlsx{}
 	// read dir cursively
 	list_file_path, _ := cli.FilePathWalkDir(path)
@@ -60,7 +67,7 @@ func (cli *CommandLine) import_all_xlsx_folder(path string) {
 		xlsx.FilePath = file_path
 		listSheet := xlsx.GetListSheet()
 		for _, sheet_name := range listSheet {
-			//fmt.Printf("Reading file %s, sheet name: %s\n", file_path, sheet_name)
+			fmt.Printf("Reading file %s, sheet name: %s\n", file_path, sheet_name)
 			xlsx.SheetName = sheet_name
 			cell_reader := xlsx.Read_cell_xlsx()
 			check, _ := cell_reader.GetCellValue(sheet_name, "A2")
@@ -80,7 +87,6 @@ func (cli *CommandLine) FilePathWalkDir(root string) ([]string, error) {
 		if !info.IsDir() {
 			files = append(files, path)
 		}
-		fmt.Printf("Path: %s\n ", path)
 		if err != nil {
 			log.Panic(err)
 		}

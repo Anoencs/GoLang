@@ -3,7 +3,6 @@ package models
 import (
 	"crud_app/xlsx"
 	"errors"
-	"fmt"
 	"log"
 	"math"
 	"os"
@@ -72,7 +71,7 @@ type Okr_user struct {
 
 type Okr_org struct {
 	Id       uuid.UUID `gorm:"primaryKey;type:uuid;default:uuid_generate_v4()"`
-	Name     string    `gorm:"type:varchar(100)"`
+	Name     string    `gorm:"type:varchar(100);unique"`
 	Org_id   uuid.UUID `gorm:"type:uuid;default:null;<-"`
 	Org      *Okr_org  `gorm:"foreignkey:Org_id;references:Id"`
 	Okr_obj  Okr_obj   `gorm:"foreignkey:Org_id;references:Id"`
@@ -140,23 +139,12 @@ type Read_Excel interface {
 	Read(excel xlsx.Xlsx) (interface{}, interface{})
 }
 
-//func (org *Okr_org) Read(excel xlsx.Xlsx)
-func (org *Okr_org) Read() []Okr_org {
+func (org *Okr_org) Read(folder string) []Okr_org {
 	res := []Okr_org{}
-	// org.Id = uuid.New()
-
-	///// manager
-
-	// Okr_org_manager := Okr_org{}
-	// Okr_org_manager.Id = uuid.New()
-	// Okr_org_manager.Name = "ITD Corporation"
-
-	// org.Org = &Okr_org_manager
-	// org.Org_id = Okr_org_manager.Id
 
 	// read list of directory
 	fileLV := []fileLevel{}
-	_ = filepath.Walk("ITD", func(path string, info os.FileInfo, err error) error {
+	_ = filepath.Walk(folder, func(path string, info os.FileInfo, err error) error {
 		temp := fileLevel{}
 		temp.Name = filepath.Base(filepath.Dir(path))
 		temp.Level = len(strings.Split(path, "\\")) - 1
@@ -170,10 +158,6 @@ func (org *Okr_org) Read() []Okr_org {
 		}
 		return nil
 	})
-	// fmt.Println(len(fileLV))
-	// for _, item := range fileLV {
-	// 	spew.Dump(item)
-	// }
 
 	var org_id_inloop uuid.UUID
 	for i := 0; i < len(fileLV)-1; i++ {
@@ -187,8 +171,8 @@ func (org *Okr_org) Read() []Okr_org {
 		}
 		if !exist { //non exist
 			res = append(res, Okr_org{Id: uuid.New(), Name: fileLV[i].Name})
+			org_id_inloop = res[len(res)-1].Id
 		}
-		org_id_inloop = res[len(res)-1].Id
 		if fileLV[i].Level < fileLV[i+1].Level {
 			for j := i + 1; j < len(fileLV); j++ {
 				if fileLV[j].Level == fileLV[i].Level {
@@ -201,9 +185,7 @@ func (org *Okr_org) Read() []Okr_org {
 		}
 
 	}
-	for _, item := range res {
-		fmt.Printf("Name: %s, Id: %s, Org_id: %s\n", item.Name, item.Id, item.Org_id)
-	}
+
 	return res
 }
 
