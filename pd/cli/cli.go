@@ -31,6 +31,10 @@ func (cli *CommandLine) Run() {
 	cli.validateArgs()
 	// init db flag
 	initCmd := flag.NewFlagSet("init", flag.ContinueOnError)
+	// query flag
+	queryCmd := flag.NewFlagSet("query", flag.ExitOnError)
+	query_user := queryCmd.String("user", "", "query about user")
+
 	// delete flag
 	deleteByIdCmd := flag.NewFlagSet("delete", flag.ExitOnError)
 	delete_ID := deleteByIdCmd.String("id", "", "The id to delete")
@@ -38,7 +42,7 @@ func (cli *CommandLine) Run() {
 	delete_tablename := deleteByIdCmd.String("tbname", "", "The table name to delete")
 
 	importCmd := flag.NewFlagSet("import", flag.ExitOnError)
-	import_xlsx := importCmd.String("xlsx", "", "The excel path")
+	import_xlsx := importCmd.String("file", "", "The excel path")
 	import_sheet := importCmd.String("sheet", "", "The sheet name")
 	import_folder := importCmd.String("dir", "", "The dir")
 	// update flag
@@ -72,7 +76,7 @@ func (cli *CommandLine) Run() {
 	update_create_by := updateCmd.String("createby", "", "The update_create_by data")
 	update_last_modified := updateCmd.String("lastmodifi", "", "The update_last_modified data")
 	update_last_modified_by := updateCmd.String("lastmodifiby", "", "The update_last_modified_by data")
-	update_status := updateCmd.Uint64("status", 0, "update_status")
+	update_status := updateCmd.Uint("status", 0, "update_status")
 	update_create := updateCmd.String("create", "", "The update_create data")
 	update_targetdate := updateCmd.String("targetdate", "", "The update_targetdate data")
 	update_duedate := updateCmd.String("duedate", "", "The update_duedate data")
@@ -97,6 +101,11 @@ func (cli *CommandLine) Run() {
 		if err != nil {
 			log.Fatal(err)
 		}
+	case "query":
+		err := queryCmd.Parse(os.Args[2:])
+		if err != nil {
+			log.Fatal(err)
+		}
 
 	}
 
@@ -109,9 +118,9 @@ func (cli *CommandLine) Run() {
 	}
 
 	if importCmd.Parsed() {
-		if *import_xlsx == "" && *import_folder != "" {
+		if *import_xlsx == "" && *import_folder != "" { //input -dir folder name -> recursive import
 			cli.import_all_xlsx_folder(*import_folder)
-		} else if *import_xlsx == "" && *import_folder == "" {
+		} else if *import_xlsx == "" && *import_folder == "" { // input -dir and -xlsx null -> panic
 			importCmd.Usage()
 			runtime.Goexit()
 		}
@@ -142,5 +151,13 @@ func (cli *CommandLine) Run() {
 	if initCmd.Parsed() {
 		db := database.Database{DbName: "okr"}
 		db.Init()
+	}
+
+	if queryCmd.Parsed() {
+		if *query_user == "" {
+			cli.list_user_okr()
+		} else if *query_user == "obj" {
+			cli.list_user_objs_okr()
+		}
 	}
 }

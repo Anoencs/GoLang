@@ -26,7 +26,7 @@ func (cli *CommandLine) Update_okr_org(dbname, tbname, id, name string) *gorm.DB
 	return db.Model(&temp).Updates(&temp)
 }
 
-func (cli *CommandLine) Update_okr_obj(dbname, tbname, id, name, org_id, user_id, period_id, review_date, create_date, create_by, last_modified, last_modified_by string, status uint64) *gorm.DB {
+func (cli *CommandLine) Update_okr_obj(dbname, tbname, id, name, org_id, user_id, period_id, review_date, create_date, create_by, last_modified, last_modified_by string, status uint) *gorm.DB {
 	database := database.Database{DbName: dbname, TableName: tbname}
 	db := database.Connect()
 	id_uuid, _ := uuid.Parse(id)
