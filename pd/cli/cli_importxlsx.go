@@ -67,7 +67,7 @@ func (cli *CommandLine) import_all_xlsx_folder(path string) {
 		xlsx.FilePath = file_path
 		listSheet := xlsx.GetListSheet()
 		for _, sheet_name := range listSheet {
-			fmt.Printf("Reading file %s, sheet name: %s\n", file_path, sheet_name)
+			//fmt.Printf("Reading file %s, sheet name: %s\n", file_path, sheet_name)
 			xlsx.SheetName = sheet_name
 			cell_reader := xlsx.Read_cell_xlsx()
 			check, _ := cell_reader.GetCellValue(sheet_name, "A2")

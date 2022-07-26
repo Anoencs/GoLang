@@ -212,7 +212,7 @@ func (period *Okr_period) Read(excel xlsx.Xlsx) {
 		period.Month = 0
 		period.Quarter = 0
 		period.Year = 0
-		log.Printf("Parsed: %s, Expected: dd/mm/yy, file name: %s, sheet name: %s,  \n", myq, excel.FilePath, excel.SheetName)
+		log.Printf("Error DMY, Parsed: %s, Expected: dd/mm/yy, file name: %s, sheet name: %s,  \n", myq, excel.FilePath, excel.SheetName)
 
 	}
 	name, err := cell_reader.GetCellValue(excel.SheetName, "F3")

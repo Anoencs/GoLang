@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"path/filepath"
+	"strings"
 
 	"crud_app/models"
 	"crud_app/util"
@@ -69,6 +70,10 @@ func (database *Database) Import2db(excel_fp xlsx.Xlsx) {
 	db := database.Connect()
 	sqlDB, _ := db.DB()
 	defer sqlDB.Close()
+	config, err := util.LoadConfig(".")
+	if err != nil {
+		log.Fatal("cannot load config:", err)
+	}
 	okr_user := models.Okr_user{}
 	okr_period := models.Okr_period{}
 	obj := models.Okr_obj{}
@@ -104,9 +109,19 @@ func (database *Database) Import2db(excel_fp xlsx.Xlsx) {
 		Find(&exists).Error
 	if !exists { //non exist
 		if okr_user.Name != "" && okr_user.Manager.Name != "" {
+			if okr_user.Department == config.BOD_ROLE {
+				bod := models.Okr_org{}
+				db.First(&bod, "Name = ?", strings.Split(excel_fp.FilePath, "\\")[0])
+				okr_user.Org_id = bod.Id
+			}
+			if okr_user.Manager.Department == config.BOD_ROLE {
+				bod := models.Okr_org{}
+				db.First(&bod, "Name = ?", strings.Split(excel_fp.FilePath, "\\")[0])
+				okr_user.Manager.Org_id = bod.Id
+			}
 			db.Create(&okr_user)
 		} else {
-			log.Printf("Error username xlsxFile: %s, sheet: %s\n", excel_fp.FilePath, excel_fp.SheetName)
+			log.Printf("Error Username xlsxFile: %s, sheet: %s\n", excel_fp.FilePath, excel_fp.SheetName)
 			return
 		}
 
@@ -116,6 +131,11 @@ func (database *Database) Import2db(excel_fp xlsx.Xlsx) {
 		if res.Manager_id == uuid.Nil {
 			if okr_user.Manager_id != uuid.Nil {
 				res.Manager_id = okr_user.Manager_id
+				if okr_user.Manager.Department == config.BOD_ROLE {
+					bod := models.Okr_org{}
+					db.First(&bod, "Name = ?", strings.Split(excel_fp.FilePath, "\\")[0])
+					okr_user.Manager.Org_id = bod.Id
+				}
 				db.Create(&okr_user.Manager)
 				db.Save(&res)
 			}
@@ -137,6 +157,7 @@ func (database *Database) Import2db(excel_fp xlsx.Xlsx) {
 		okr_kr[i].User_id = okr_user.User_id
 		db.Create(&okr_kr[i])
 	}
+	fmt.Printf("Reading file %s, sheet name: %s\n", excel_fp.FilePath, excel_fp.SheetName)
 }
 func (database *Database) Query_list_user() {
 	db := database.Connect()
