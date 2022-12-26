@@ -6,6 +6,14 @@ import (
 	"log"
 	"net"
 	"os"
+	"sync"
+)
+
+var (
+	conns   []net.Conn
+	connCh  = make(chan net.Conn)
+	closeCh = make(chan net.Conn)
+	msgCh   = make(chan string)
 )
 
 func onMessage(conn net.Conn) {
@@ -17,10 +25,44 @@ func onMessage(conn net.Conn) {
 	}
 }
 
-func main() {
-	connection, err := net.Dial("tcp", "localhost:3000")
+func removeConn(conn net.Conn) {
+	var i int
+	for i = range conns {
+		if conns[i] == conn {
+			break
+		}
+	}
+	conns = append(conns[i:], conns[:i+1]...)
+}
+
+func publishMsg(conn net.Conn, msg string) {
+	for i := range conns {
+		if conns[i] != conn {
+			conns[i].Write([]byte(msg))
+		}
+	}
+}
+
+func onMessageServer(conn net.Conn) {
+	for {
+		reader := bufio.NewReader(conn)
+		msg, err := reader.ReadString('\n')
+
+		if err != nil {
+			break
+		}
+
+		msgCh <- msg
+		publishMsg(conn, msg)
+
+	}
+
+	closeCh <- conn
+}
+func ConnectS(addr string) {
+	connection, err := net.Dial("tcp", fmt.Sprintf("localhost:%s", addr))
 	if err != nil {
-		log.Fatal(err)
+
 	}
 
 	fmt.Print("your name:")
@@ -47,4 +89,50 @@ func main() {
 	}
 
 	connection.Close()
+}
+func ListenS(addr string) {
+	ln, err := net.Listen("tcp", fmt.Sprintf(":%s", addr))
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	go func() {
+		for {
+			conn, err := ln.Accept()
+			if err != nil {
+				log.Fatal(err)
+			}
+
+			conns = append(conns, conn)
+			connCh <- conn
+		}
+	}()
+
+	for {
+		select {
+		case conn := <-connCh:
+			go onMessage(conn)
+
+		case msg := <-msgCh:
+			fmt.Print(msg)
+
+		case conn := <-closeCh:
+			fmt.Println("client exit")
+			removeConn(conn)
+		}
+	}
+}
+
+func main() {
+	var wg sync.WaitGroup
+	wg.Add(2)
+	go func() {
+		ListenS("2901")
+		wg.Done()
+	}()
+	go func() {
+		ConnectS("2900")
+		wg.Done()
+	}()
+	wg.Wait()
 }

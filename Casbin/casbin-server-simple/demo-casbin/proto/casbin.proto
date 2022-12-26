@@ -1,0 +1,31 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "io.grpc.examples.proto";
+option java_outer_classname = "CasbinProto";
+option go_package = "./;proto";
+option csharp_namespace = "CasbinOrg.Grpc";
+
+package proto;
+
+// The Casbin service definition.
+service Casbin {
+    rpc CheckPermission (AuthorizeRequest) returns (BoolReply) {}
+}
+
+message AuthorizeRequest {
+  string sub = 1;
+  string obj = 2;
+  string act = 3;
+}
+
+message EmptyRequest {
+  int32 handler = 1;
+}
+
+message BoolReply {
+  bool res = 1;
+}
+
+message EmptyReply {
+}

@@ -1,0 +1,9 @@
+version: '3'
+
+services:
+  article-service:
+    build: ./
+    volumes:
+      - ./:/app
+    ports:
+      - 5001:3000 

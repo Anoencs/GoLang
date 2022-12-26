@@ -1,0 +1,78 @@
+2022/07/25 14:18:38 Error DMY, Parsed: …, Expected: dd/mm/yy, file name: ITD\Ban Kinh doanh\Kinh doanh- HCM\20220705 - OKR - Sale HCM - R3.xlsx, sheet name: NGUYEN,  
+2022/07/25 14:18:42 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: Lien 6-9
+2022/07/25 14:18:43 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: O kì 1 BNS
+2022/07/25 14:18:43 Error DMY, Parsed: K4/2022, Expected: dd/mm/yy, file name: ITD\Ban Phần mềm\OKR_CIO-SW_20220712-1800_Created.xlsx, sheet name: CIO_ITD-SW,  
+2022/07/25 14:18:43 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: SW-Manager
+2022/07/25 14:18:45 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: Tien_Vo
+2022/07/26 08:59:10 Error DMY, Parsed: …, Expected: dd/mm/yy, file name: ITD\Ban Kinh doanh\Kinh doanh- HCM\20220705 - OKR - Sale HCM - R3.xlsx, sheet name: NGUYEN,  
+2022/07/26 08:59:16 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: Lien 6-9
+2022/07/26 08:59:17 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: O kì 1 BNS
+2022/07/26 08:59:17 Error DMY, Parsed: K4/2022, Expected: dd/mm/yy, file name: ITD\Ban Phần mềm\OKR_CIO-SW_20220712-1800_Created.xlsx, sheet name: CIO_ITD-SW,  
+2022/07/26 08:59:18 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: SW-Manager
+2022/07/26 08:59:20 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: Tien_Vo
+2022/07/26 09:13:18 Error DMY, Parsed: …, Expected: dd/mm/yy, file name: ITD\Ban Kinh doanh\Kinh doanh- HCM\20220705 - OKR - Sale HCM - R3.xlsx, sheet name: NGUYEN,  
+2022/07/26 09:13:23 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: Lien 6-9
+2022/07/26 09:13:24 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: O kì 1 BNS
+2022/07/26 09:13:24 Error DMY, Parsed: K4/2022, Expected: dd/mm/yy, file name: ITD\Ban Phần mềm\OKR_CIO-SW_20220712-1800_Created.xlsx, sheet name: CIO_ITD-SW,  
+2022/07/26 09:13:25 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: SW-Manager
+2022/07/26 09:13:27 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: Tien_Vo
+2022/07/26 09:21:59 Error DMY, Parsed: …, Expected: dd/mm/yy, file name: ITD\Ban Kinh doanh\Kinh doanh- HCM\20220705 - OKR - Sale HCM - R3.xlsx, sheet name: NGUYEN,  
+2022/07/26 09:22:04 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: Lien 6-9
+2022/07/26 09:22:04 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: O kì 1 BNS
+2022/07/26 09:22:05 Error DMY, Parsed: K4/2022, Expected: dd/mm/yy, file name: ITD\Ban Phần mềm\OKR_CIO-SW_20220712-1800_Created.xlsx, sheet name: CIO_ITD-SW,  
+2022/07/26 09:22:05 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: SW-Manager
+2022/07/26 09:22:07 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: Tien_Vo
+2022/07/26 13:55:46 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: BP DVKT
+2022/07/26 13:55:46 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Anh Vu,  
+2022/07/26 13:55:46 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Anh Vu
+2022/07/26 13:55:46 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Dung Thuy,  
+2022/07/26 13:55:46 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Dung Thuy
+2022/07/26 13:55:46 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Dinh Ba Thi,  
+2022/07/26 13:55:46 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Dinh Ba Thi
+2022/07/26 13:55:46 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Le Duc Canh,  
+2022/07/26 13:55:46 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Le Duc Canh
+2022/07/26 13:55:47 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Nguyen An Pham,  
+2022/07/26 13:55:47 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Nguyen An Pham
+2022/07/26 13:55:47 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Xuan Vu,  
+2022/07/26 13:55:47 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Xuan Vu
+2022/07/26 13:55:47 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Bui Dac Tuan,  
+2022/07/26 13:55:47 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Bui Dac Tuan
+2022/07/26 13:55:47 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Nguyen Hong Thinh,  
+2022/07/26 13:55:47 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Nguyen Hong Thinh
+2022/07/26 13:55:48 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Bui Dac Tien,  
+2022/07/26 13:55:48 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Bui Dac Tien
+2022/07/26 13:55:48 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Luu Quoc Vuong,  
+2022/07/26 13:55:48 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Luu Quoc Vuong
+2022/07/26 13:55:56 Error DMY, Parsed: …, Expected: dd/mm/yy, file name: ITD\Ban Kinh doanh\Kinh doanh- HCM\20220705 - OKR - Sale HCM - R3.xlsx, sheet name: NGUYEN,  
+2022/07/26 13:56:01 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: Lien 6-9
+2022/07/26 13:56:02 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: O kì 1 BNS
+2022/07/26 13:56:02 Error DMY, Parsed: K4/2022, Expected: dd/mm/yy, file name: ITD\Ban Phần mềm\OKR_CIO-SW_20220712-1800_Created.xlsx, sheet name: CIO_ITD-SW,  
+2022/07/26 13:56:03 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: SW-Manager
+2022/07/26 13:56:05 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: Tien_Vo
+2022/07/27 14:14:24 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: BP DVKT
+2022/07/27 14:14:24 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Anh Vu,  
+2022/07/27 14:14:24 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Anh Vu
+2022/07/27 14:14:24 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Dung Thuy,  
+2022/07/27 14:14:24 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Dung Thuy
+2022/07/27 14:14:25 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Dinh Ba Thi,  
+2022/07/27 14:14:25 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Dinh Ba Thi
+2022/07/27 14:14:25 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Le Duc Canh,  
+2022/07/27 14:14:25 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Le Duc Canh
+2022/07/27 14:14:25 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Nguyen An Pham,  
+2022/07/27 14:14:25 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Nguyen An Pham
+2022/07/27 14:14:25 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Xuan Vu,  
+2022/07/27 14:14:25 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Xuan Vu
+2022/07/27 14:14:25 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Bui Dac Tuan,  
+2022/07/27 14:14:25 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Bui Dac Tuan
+2022/07/27 14:14:26 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Nguyen Hong Thinh,  
+2022/07/27 14:14:26 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Nguyen Hong Thinh
+2022/07/27 14:14:26 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Bui Dac Tien,  
+2022/07/27 14:14:26 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Bui Dac Tien
+2022/07/27 14:14:26 Error DMY, Parsed: , Expected: dd/mm/yy, file name: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet name: Luu Quoc Vuong,  
+2022/07/27 14:14:26 Error Username xlsxFile: ITD\Ban Dự án\Dịch vụ\2022\KY I\OKR DVKT 2022 - TRIEN KHAI KY I V1.0.xlsx, sheet: Luu Quoc Vuong
+2022/07/27 14:14:35 Error DMY, Parsed: …, Expected: dd/mm/yy, file name: ITD\Ban Kinh doanh\Kinh doanh- HCM\20220705 - OKR - Sale HCM - R3.xlsx, sheet name: NGUYEN,  
+2022/07/27 14:14:40 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: Lien 6-9
+2022/07/27 14:14:41 Error Username xlsxFile: ITD\Ban Nhân sự\OKR_BNS_update 07.22.xlsx, sheet: O kì 1 BNS
+2022/07/27 14:14:41 Error DMY, Parsed: K4/2022, Expected: dd/mm/yy, file name: ITD\Ban Phần mềm\OKR_CIO-SW_20220712-1800_Created.xlsx, sheet name: CIO_ITD-SW,  
+2022/07/27 14:14:42 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: SW-Manager
+2022/07/27 14:14:44 Error Username xlsxFile: ITD\Ban Phần mềm\OKR_SW_Members_20220712.xlsx, sheet: Tien_Vo

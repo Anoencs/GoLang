@@ -168,17 +168,3 @@ func (database *Database) Query_list_user() {
 		fmt.Printf("Id: %s,Name: %s \n", user.User_id, user.Name)
 	}
 }
-
-func (database *Database) Query_list_numsobj_user() {
-	var users []models.Okr_user
-	db := database.Connect()
-	db.Table("okr_users").
-		Select("okr_users.user_id,okr_users.name, count(okr_objs.id) as numObjs").
-		Joins("inner join okr_objs on okr_users.user_id = okr_objs.user_id").
-		Group("okr_users.user_id").Scan(&users)
-	println(len(users))
-	for _, user := range users {
-		fmt.Printf("Id: %s Name : %s , Objs: %d\n", user.User_id, user.Name, user.Numobjs)
-	}
-
-}

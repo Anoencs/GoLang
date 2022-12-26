@@ -156,8 +156,6 @@ func (cli *CommandLine) Run() {
 	if queryCmd.Parsed() {
 		if *query_user == "" {
 			cli.list_user_okr()
-		} else if *query_user == "obj" {
-			cli.list_user_objs_okr()
 		}
 	}
 }

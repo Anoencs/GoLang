@@ -1,0 +1,9 @@
+{
+    "name":"Chau",
+    "email":"chaudoctor@gmail.com",
+    "role":"doctor",
+    "password":"123"
+}
+
+
+eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJleHAiOjE2NjA5MDYyNjAsImlhdCI6MTY2MDg5NTQ2MCwidXNlcklEIjoxfQ._eBSnocbmcfydArYcpFT9VvsCqam-FIiPxmCMB_wjTM

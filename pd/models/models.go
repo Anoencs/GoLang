@@ -59,7 +59,6 @@ type Okr_user struct {
 	Name                string    `gorm:"type:varchar(100);<-"`
 	Role                string    `gorm:"type:varchar(50);<-"`
 	Department          string    `gorm:"type:varchar(100);<-"`
-	Numobjs             int       `gorm:"type:integer"`
 	Manager             *Okr_user `gorm:"foreignkey:Manager_id;references:User_id"`
 	Okr_kr              Okr_kr    `gorm:"foreignkey:User_id;references:User_id"`
 	Okr_kr_create_by    Okr_kr    `gorm:"foreignkey:Create_by;references:User_id"`

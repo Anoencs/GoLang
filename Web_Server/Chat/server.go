@@ -6,13 +6,7 @@ import (
 	"log"
 	"net"
 )
-
-var (
-	conns   []net.Conn
-	connCh  = make(chan net.Conn)
-	closeCh = make(chan net.Conn)
-	msgCh   = make(chan string)
-)
+1111111111111
 
 func main() {
 	ln, err := net.Listen("tcp", ":3000")
